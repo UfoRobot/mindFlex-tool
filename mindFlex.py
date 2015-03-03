@@ -11,13 +11,14 @@ def read():
     # Choose a name for log file
     name = raw_input("Enter name for the session ")
     
-    # This script doesn't know (yet) his current directory. This is where the logfiles are gonna be saved.
-    # TODO: automatic set current working directory
-    if os.path.exists('/Users/Ascanio/Documents/PPrograms/mindFlex/'+name+'.txt'):
+
+    # Current dir
+    cwd = os.getcwd()
+    if os.path.exists(cwd+name+'.txt'):
         print "File exists"
         return
     else:
-        f = open("/Users/Ascanio/Documents/PPrograms/mindFlex/"+name+".txt", 'w')
+        f = open(cwd+name+".txt", 'w')
 
     # Select minimum signal strength 
     # All packets are going to be logged but only the filtered ones are gonna be used for stat-values
