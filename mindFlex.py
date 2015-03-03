@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-from __future__ import division
+from __future__ import division             # For float precision division. 
 import serial
 import time
 import os
@@ -10,15 +10,20 @@ def read():
 
     # Choose a name for log file
     name = raw_input("Enter name for the session ")
+    
+    # This script doesn't know (yet) his current directory. This is where the logfiles are gonna be saved.
+    # TODO: automatic set current working directory
     if os.path.exists('/Users/Ascanio/Documents/PPrograms/mindFlex/'+name+'.txt'):
         print "File exists"
         return
     else:
         f = open("/Users/Ascanio/Documents/PPrograms/mindFlex/"+name+".txt", 'w')
 
-    # Select minimum signal strength
+    # Select minimum signal strength 
+    # All packets are going to be logged but only the filtered ones are gonna be used for stat-values
     dropLower = int(raw_input("Set mininum signal strength: (200 to accept them all) "))
 
+    # Set the port your arduino is on. You can find it in the arduino IDE, right bottom corner.
     mindFlex = serial.Serial('/dev/tty.usbmodem1411', 9600)
 
     # Init sampleSum where to store sum of all accepted values
@@ -34,7 +39,7 @@ def read():
     
     try:
         while True:
-            # packet is a string, ending with /r/n
+            # packet is a string, ending with '/r/n'
             packet = mindFlex.readline()
             # Save on logfile
             f.writelines(packet)
@@ -60,7 +65,7 @@ def read():
                 print "Dropped"
                 continue
 
-            # +1 packets accepted
+            # +1 if packet's been accepted
             count += 1
 
             # Update sampleSum
@@ -89,6 +94,8 @@ def read():
         print sampleMax
         print "Normalized mean"
         print sampleMeanN
+        
+        # TODO: close serial comunication
 
 
 
