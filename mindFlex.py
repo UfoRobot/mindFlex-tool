@@ -96,9 +96,10 @@ def read():
         print "Normalized mean"
         print sampleMeanN
         
-        # TODO: close serial comunication
-
-
+        # Don't leave the port open!
+        # Still doesn't work. You have to unplug and replug the usb. Damn it!
+        mindFlex.close() 
+        print "Port closed"
 
         
         
