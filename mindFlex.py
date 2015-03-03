@@ -14,11 +14,11 @@ def read():
 
     # Current dir
     cwd = os.getcwd()
-    if os.path.exists(cwd+name+'.txt'):
+    if os.path.exists(cwd+'/'+name+'.txt'):
         print "File exists"
         return
     else:
-        f = open(cwd+name+".txt", 'w')
+        f = open(cwd+'/'+name+".txt", 'w')
 
     # Select minimum signal strength 
     # All packets are going to be logged but only the filtered ones are gonna be used for stat-values
